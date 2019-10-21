@@ -201,7 +201,7 @@ def wave_bases(mother, k, scale, param):
 		coi = fourier_factor / np.sqrt(2)
 		dofmin = 1
 	else:
-		print 'Mother must be one of MORLET, PAUL, DOG'
+		print('Mother must be one of MORLET, PAUL, DOG')
 
 	return daughter, fourier_factor, coi, dofmin
 
@@ -306,7 +306,7 @@ def wave_signif(Y, dt, scale, sigtest=-1, lag1=-1, siglvl=-1, dof=-1, mother=-1,
 		m = param
 		fourier_factor = 2 * np.pi * np.sqrt(2. / (2 * m + 1))
 	else:
-		print 'Mother must be one of MORLET, PAUL, DOG'
+		print('Mother must be one of MORLET, PAUL, DOG')
 
 	period = scale * fourier_factor
 	dofmin = empir[0]  # Degrees of freedom with no smoothing
@@ -335,19 +335,19 @@ def wave_signif(Y, dt, scale, sigtest=-1, lag1=-1, siglvl=-1, dof=-1, mother=-1,
 		for a1 in range(0, J1 + 1):
 			chisquare = chisquare_inv(siglvl, dof[a1]) / dof[a1]
 			signif[a1] = fft_theor[a1] * chisquare
-		print chisquare
+		print(chisquare)
 	elif sigtest == 2:  # time-averaged significance
 		if len(dof) != 2:
-			print 'ERROR: DOF must be set to [S1,S2], the range of scale-averages'
+			print('ERROR: DOF must be set to [S1,S2], the range of scale-averages')
 		if Cdelta == -1:
-			print 'ERROR: Cdelta & dj0 not defined for ' + mother + ' with param = ' + str(param)
+			print('ERROR: Cdelta & dj0 not defined for ' + mother + ' with param = ' + str(param))
 
 		s1 = dof[0]
 		s2 = dof[1]
 		avg =  np.logical_and(scale >= 2, scale < 8)# scales between S1 & S2
 		navg = np.sum(np.array(np.logical_and(scale >= 2, scale < 8), dtype=int))
 		if navg == 0:
-			print 'ERROR: No valid scales between ' + str(s1) + ' and ' + str(s2)
+			print('ERROR: No valid scales between ' + str(s1) + ' and ' + str(s2))
 		Savg = 1. / np.sum(1. / scale[avg])  # [Eqn(25)]
 		Smid = np.exp((np.log(s1) + np.log(s2)) / 2.)  # power-of-two midpoint
 		dof = (dofmin * navg * Savg / Smid) * np.sqrt(1 + (navg * dj / dj0) ** 2)  # [Eqn(28)]
@@ -355,7 +355,7 @@ def wave_signif(Y, dt, scale, sigtest=-1, lag1=-1, siglvl=-1, dof=-1, mother=-1,
 		chisquare = chisquare_inv(siglvl, dof) / dof
 		signif = (dj * dt / Cdelta / Savg) * fft_theor * chisquare  # [Eqn(26)]
 	else:
-		print 'ERROR: sigtest must be either 0, 1, or 2'
+		print('ERROR: sigtest must be either 0, 1, or 2')
 
 	return signif
 
@@ -374,7 +374,7 @@ def wave_signif(Y, dt, scale, sigtest=-1, lag1=-1, siglvl=-1, dof=-1, mother=-1,
 def chisquare_inv(P, V):
 
 	if (1 - P) < 1E-4:
-		print 'P must be < 0.9999'
+		print('P must be < 0.9999')
 
 	if P == 0.95 and V == 2:  # this is a no-brainer
 		X = 5.9915
