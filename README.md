@@ -7,3 +7,4 @@ Wavelet analízis és szintézis
 
 * [DWT.ipynb](https://github.com/gyulat/Wavelet/blob/master/DWT.ipynb): Diszkrét wavelet transzformáció, kép tömörítés waveletekkel
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/gyulat/Wavelet/master)
